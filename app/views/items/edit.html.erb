@@ -1,0 +1,14 @@
+<div class="jumbotron">
+  <h1 class="display-4">Editing item</h1>
+  <p class="lead">
+    
+  <%= render "form", item: @item %>
+
+  </p>
+  
+  <p class="lead">
+  <%= link_to "Show", @item, class:"btn btn-dark" %> 
+  <%= link_to "Back", items_path, class: "btn btn-primary" %>
+  </p>
+</div>
+

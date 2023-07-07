@@ -1,0 +1,64 @@
+<nav class="navbar navbar-dark bg-dark justify-content-between">
+  <li class="nav-item">
+    <%= link_to 'PERSONS DESCRIPTION', root_path, class:'navbar-brand' %>
+  </li>
+  <% if user_signed_in? %>
+    <li class="nav-item">
+      <%= link_to 'SIGN OUT',  destroy_user_session_path, method: :delete, class:'navbar-brand' %>
+    </li>
+
+    <li class="nav-item">
+      <%= link_to 'EDIT PROFILE',  edit_user_registration_path, class:'navbar-brand' %>
+    </li>
+  <% else %>
+    <li class="nav-item">
+      <%= link_to 'SIGN UP', new_user_registration_path, class:'navbar-brand' %>
+    </li>
+
+    <li class="nav-item">
+      <%= link_to 'SIGN IN', new_user_session_path, class:'navbar-brand' %>
+    </li>
+  <% end %>
+
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+  </form>
+
+  <p style="color: green"><%= notice %></p>
+
+  
+
+  <div id="items">
+    <table class="table table table-striped table-bordered table-dark table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @items.each do |item| %>
+          <tr scope="row">
+            <td style="width: 25%">
+              <%= item.name %>
+            </td>
+            <td style="width: 50%">
+              <%= item.description %>
+            </td>
+            <td style="width: 25%">
+              <%= link_to "Show", item, class: "btn btn-secondary" %>
+              <%= link_to "Delete", item, class: "btn btn-danger", method: :delete, data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" } %>
+              <%= link_to "Edit", edit_item_path(item), class: "btn btn-success" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</nav>
+
+
+<%= link_to "New item", new_item_path, class: "btn btn-primary", data: { turbo_frame: "remote_modal" }%>
+
+
